@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.rdoc_options  = ["--charset= UTF-8"]
 
-  s.add_runtime_dependency('nokogiri', "~> 1.5.5")
+  s.add_runtime_dependency('nokogiri', ">= 1.5.5")
   s.add_development_dependency('rspec', "~> 2.7.0")
   s.add_development_dependency('pry', "~> 0.9.10")
   s.add_development_dependency('rake', "~> 0.9.2.2")
