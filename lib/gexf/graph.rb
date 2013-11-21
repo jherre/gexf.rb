@@ -62,9 +62,18 @@ class GEXF::Graph
   def attribute_definitions
     @attributes.dup
   end
+  
+  def prune_unconnected_nodes!
+    @nodes.delete_if{ |node_id| !@edges.contain?(node_id) }
+  end
 
   def to_xml
     serializer = GEXF::XmlSerializer.new(self)
+    serializer.serialize!
+  end
+  
+  def to_json
+    serializer = GEXF::JsonSerializer.new(self)
     serializer.serialize!
   end
 

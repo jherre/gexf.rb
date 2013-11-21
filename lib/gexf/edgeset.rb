@@ -4,4 +4,8 @@ class GEXF::EdgeSet < GEXF::SetOfSets
     append_to_key(edge.target_id, edge) unless edge.directed?
     self
   end
+  
+  def contain?(node_id)
+    @hash.has_key?(node_id)
+  end
 end
