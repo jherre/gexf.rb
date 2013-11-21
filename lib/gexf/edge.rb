@@ -1,5 +1,6 @@
 class GEXF::Edge
   include GEXF::Attribute::Assignable
+  include GEXF::Viz::Assignable
 
   DIRECTED   = :directed
   UNDIRECTED = :undirected

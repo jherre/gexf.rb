@@ -7,6 +7,7 @@ require 'set'
 module GEXF;end
 
 require 'version'
+require 'viz'
 require 'attribute'
 require 'attribute/definable'
 require 'attribute/assignable'

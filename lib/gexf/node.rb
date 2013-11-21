@@ -1,6 +1,7 @@
 class GEXF::Node
   extend Forwardable
   include GEXF::Attribute::Assignable
+  include GEXF::Viz::Assignable
 
   attr_reader :id, :label
 
@@ -40,7 +41,7 @@ class GEXF::Node
   def outgoing_connections
     connections.select { |edge| edge.source_id == id }
   end
-
+  
   def to_hash
     {:id => id, :label => label}
   end

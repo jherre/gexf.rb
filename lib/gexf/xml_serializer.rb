@@ -1,10 +1,8 @@
 class GEXF::XmlSerializer
 
   GEXF_ATTRS = {
-    'xmlns'     => '"http://www.gexf.net/1.2draft',
-    'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
-    'xsi'       => 'http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd',
-    'version'   => '1.2'
+    'xmlns' => "http://www.gephi.org/gexf",
+    'xmlns:viz' => "http://www.gephi.org/gexf/viz",
   }
 
   def initialize(graph)
@@ -22,9 +20,10 @@ private
   end
 
   def graph_attributes
-    { :defaultedgetype   => g.defaultedgetype,
-      :idtype            => g.idtype,
-      :mode              => g.mode }
+    # { :defaultedgetype   => g.defaultedgetype,
+    #   :idtype            => g.idtype,
+    #   :mode              => g.mode }
+    { :type => "static" }
   end
 
   def build_attributes(xml)
@@ -61,8 +60,8 @@ private
   end
 
   def build_item(xml, item, tagname)
-    if item.attr_values.any?
-      xml.send(tagname, item.to_hash) do
+    xml.send(tagname, item.to_hash) do
+      if item.attr_values.any?
         xml.attvalues do
           item.attr_values.each do |id, value|
             value = value.join('|') if value.respond_to?(:join)
@@ -70,8 +69,12 @@ private
           end
         end
       end
-    else
-      xml.send(tagname, item.to_hash)
+      
+      if item.viz_values.any?
+        item.viz_values.each do |viz|
+          xml.send(viz.tagname, viz.to_hash)
+        end
+      end
     end
   end
 
